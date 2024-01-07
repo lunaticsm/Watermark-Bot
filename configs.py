@@ -8,9 +8,9 @@ import os
 
 
 class Config(object):
-	BOT_TOKEN = os.environ.get("BOT_TOKEN", "5895970174:AAH-ADT4n5aVLSvWgZi2BRoQrx2RymoIzQo")
+	BOT_TOKEN = os.environ.get("BOT_TOKEN")
 	API_ID = int(os.environ.get("API_ID", 16674747))
-	API_HASH = os.environ.get("API_HASH", "b2de5fa3bd61ca397fbb650b0435d792")
+	API_HASH = os.environ.get("API_HASH")
 	STREAMTAPE_API_PASS = os.environ.get("STREAMTAPE_API_PASS", "NoNeed")
 	STREAMTAPE_API_USERNAME = os.environ.get("STREAMTAPE_API_USERNAME", "NoNeed")
 	LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL"))
@@ -18,7 +18,7 @@ class Config(object):
 	DOWN_PATH = os.environ.get("DOWN_PATH", "./downloads")
 	PRESET = os.environ.get("PRESET", "ultrafast")
 	OWNER_ID = int(os.environ.get("OWNER_ID", 1445283714))
-	CAPTION = "By @AHToolsBot"
+	CAPTION = "By @hentaiiboys"
 	BOT_USERNAME = os.environ.get("BOT_USERNAME", "VideoWatermark_Bot")
 	DATABASE_URL = os.environ.get("DATABASE_URL")
 	BROADCAST_AS_COPY = bool(os.environ.get("BROADCAST_AS_COPY", False))
@@ -29,9 +29,9 @@ Hi, I am Video Watermark Adder Bot!
 **How to Added Watermark to a Video?**
 **Usage:** First Send a JPG Image/Logo, then send any Video. Better add watermark to a MP4 or MKV Video.
 
-__Note: I can only process one video at a time. As my server is Heroku, my health is not good. If you have any issues with Adding Watermark to a Video, then please Report at [Support Group](https://t.me/linux_repo).__
+__Note: I can only process one video at a time. As my server is Heroku, my health is not good. If you have any issues with Adding Watermark to a Video, then please Report at [Support Group](https://t.me/hentaiiboys).__
 
-Desgined by @AbirHasan2005
+Desgined by @hentaiiboys
 """
 	PROGRESS = """
 Percentage : {0}%
