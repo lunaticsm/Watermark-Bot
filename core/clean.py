@@ -12,7 +12,7 @@ async def delete_trash(file):
 
 async def delete_all():
     try:
-        root = Config.DOWN_PATH + "/WatermarkAdder/"
+        root = f"{Config.DOWN_PATH}/WatermarkAdder/"
         shutil.rmtree(root)
     except Exception as e:
         print(e)

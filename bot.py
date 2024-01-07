@@ -79,15 +79,15 @@ async def SettingsBot(bot, cmd):
 	## --- Checks --- ##
 	position_tag = None
 	watermark_position = await db.get_position(cmd.from_user.id)
-	if watermark_position == "5:main_h-overlay_h":
-		position_tag = "Bottom Left"
-	elif watermark_position == "main_w-overlay_w-5:main_h-overlay_h-5":
-		position_tag = "Bottom Right"
-	elif watermark_position == "main_w-overlay_w-5:5":
-		position_tag = "Top Right"
-	elif watermark_position == "5:5":
+	if watermark_position == "5:5":
 		position_tag = "Top Left"
 
+	elif watermark_position == "5:main_h-overlay_h":
+		position_tag = "Bottom Left"
+	elif watermark_position == "main_w-overlay_w-5:5":
+		position_tag = "Top Right"
+	elif watermark_position == "main_w-overlay_w-5:main_h-overlay_h-5":
+		position_tag = "Bottom Right"
 	watermark_size = await db.get_size(cmd.from_user.id)
 	if int(watermark_size) == 5:
 		size_tag = "5%"
@@ -118,15 +118,57 @@ async def SettingsBot(bot, cmd):
 		parse_mode="Markdown",
 		reply_markup=InlineKeyboardMarkup(
 			[
-				[InlineKeyboardButton(f"Watermark Position - {position_tag}", callback_data="lol")],
-				[InlineKeyboardButton("Set Top Left", callback_data=f"position_5:5"), InlineKeyboardButton("Set Top Right", callback_data=f"position_main_w-overlay_w-5:5")],
-				[InlineKeyboardButton("Set Bottom Left", callback_data=f"position_5:main_h-overlay_h"), InlineKeyboardButton("Set Bottom Right", callback_data=f"position_main_w-overlay_w-5:main_h-overlay_h-5")],
-				[InlineKeyboardButton(f"Watermark Size - {size_tag}", callback_data="lel")],
-				[InlineKeyboardButton("5%", callback_data=f"size_5"), InlineKeyboardButton("7%", callback_data=f"size_7"), InlineKeyboardButton("10%", callback_data=f"size_10"), InlineKeyboardButton("15%", callback_data=f"size_15"), InlineKeyboardButton("20%", callback_data=f"size_20")],
-				[InlineKeyboardButton("25%", callback_data=f"size_25"), InlineKeyboardButton("30%", callback_data=f"size_30"), InlineKeyboardButton("35%", callback_data=f"size_30"), InlineKeyboardButton("40%", callback_data=f"size_40"), InlineKeyboardButton("45%", callback_data=f"size_45")],
-				[InlineKeyboardButton(f"Reset Settings To Default", callback_data="reset")]
+				[
+					InlineKeyboardButton(
+						f"Watermark Position - {position_tag}",
+						callback_data="lol",
+					)
+				],
+				[
+					InlineKeyboardButton(
+						"Set Top Left", callback_data="position_5:5"
+					),
+					InlineKeyboardButton(
+						"Set Top Right",
+						callback_data="position_main_w-overlay_w-5:5",
+					),
+				],
+				[
+					InlineKeyboardButton(
+						"Set Bottom Left",
+						callback_data="position_5:main_h-overlay_h",
+					),
+					InlineKeyboardButton(
+						"Set Bottom Right",
+						callback_data="position_main_w-overlay_w-5:main_h-overlay_h-5",
+					),
+				],
+				[
+					InlineKeyboardButton(
+						f"Watermark Size - {size_tag}", callback_data="lel"
+					)
+				],
+				[
+					InlineKeyboardButton("5%", callback_data="size_5"),
+					InlineKeyboardButton("7%", callback_data="size_7"),
+					InlineKeyboardButton("10%", callback_data="size_10"),
+					InlineKeyboardButton("15%", callback_data="size_15"),
+					InlineKeyboardButton("20%", callback_data="size_20"),
+				],
+				[
+					InlineKeyboardButton("25%", callback_data="size_25"),
+					InlineKeyboardButton("30%", callback_data="size_30"),
+					InlineKeyboardButton("35%", callback_data="size_30"),
+					InlineKeyboardButton("40%", callback_data="size_40"),
+					InlineKeyboardButton("45%", callback_data="size_45"),
+				],
+				[
+					InlineKeyboardButton(
+						"Reset Settings To Default", callback_data="reset"
+					)
+				],
 			]
-		)
+		),
 	)
 
 

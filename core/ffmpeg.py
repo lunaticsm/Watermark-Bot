@@ -50,18 +50,9 @@ async def vidmark(the_media, message, working_dir, watermark_path, output_vid, t
             time_in_us=re.findall("out_time_ms=(\d+)", text)
             progress=re.findall("progress=(\w+)", text)
             speed=re.findall("speed=(\d+\.?\d*)", text)
-            if len(frame):
-                frame = int(frame[-1])
-            else:
-                frame = 1;
-            if len(speed):
-                speed = speed[-1]
-            else:
-                speed = 1;
-            if len(time_in_us):
-                time_in_us = time_in_us[-1]
-            else:
-                time_in_us = 1;
+            frame = int(frame[-1]) if len(frame) else 1
+            speed = speed[-1] if len(speed) else 1
+            time_in_us = time_in_us[-1] if len(time_in_us) else 1
             if len(progress):
                 if progress[-1] == "end":
                     break
@@ -74,9 +65,11 @@ async def vidmark(the_media, message, working_dir, watermark_path, output_vid, t
             percentage = math.floor(elapsed_time * 100 / total_time)
             progress_str = "📊 **Progress:** {0}%\n`[{1}{2}]`".format(
                 round(percentage, 2),
-                ''.join(["▓" for i in range(math.floor(percentage / 10))]),
-                ''.join(["░" for i in range(10 - math.floor(percentage / 10))])
-                )
+                ''.join(["▓" for _ in range(math.floor(percentage / 10))]),
+                ''.join(
+                    ["░" for _ in range(10 - math.floor(percentage / 10))]
+                ),
+            )
             stats = f'📦️ **Adding Watermark [Preset: `{mode}`]**\n\n' \
                     f'⏰️ **ETA:** `{ETA}`\n❇️ **Position:** `{position}`\n🔰 **PID:** `{process.pid}`\n🔄 **Duration: `{format_timespan(total_time)}`**\n\n' \
                     f'{progress_str}\n'
@@ -85,19 +78,15 @@ async def vidmark(the_media, message, working_dir, watermark_path, output_vid, t
                 await message.edit(text=stats)
             except FloodWait as e:
                 await asyncio.sleep(e.x)
-                pass
             except:
                 pass
-        
+
     stdout, stderr = await process.communicate()
     e_response = stderr.decode().strip()
     t_response = stdout.decode().strip()
     print(e_response)
     print(t_response)
-    if os.path.lexists(output_vid):
-        return output_vid
-    else:
-        return None
+    return output_vid if os.path.lexists(output_vid) else None
 
 async def take_screen_shot(video_file, output_directory, ttl):
     # https://stackoverflow.com/a/13891070/4723940
@@ -124,7 +113,4 @@ async def take_screen_shot(video_file, output_directory, ttl):
     stdout, stderr = await process.communicate()
     e_response = stderr.decode().strip()
     t_response = stdout.decode().strip()
-    if os.path.lexists(out_put_file_name):
-        return out_put_file_name
-    else:
-        return None
+    return out_put_file_name if os.path.lexists(out_put_file_name) else None
